@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+<script src="D:/Shruthi/AngularJSProject/js/angform.js"></script>
+
+<link rel="stylesheet" href="style.css" >
+
+</head>
+<body>
+<h2>AngularJS Form Validation Example</h2>
+<form ng-controller="validationCtrl" name="sampleeForm" novalidate>
+<p>
+    <label>Username:</label>
+    <input type="text" class="form-control" name="username" ng-model="username" required>
+    <span ng-show="samplrForm.username.$error.required">Username is required.</span>
+
+    <label>Email:</label>
+    <input type="email" class="form-control" name="email" ng-model="email" required>
+    <span ng-show="samplrForm.email.$error.required">Email is required.</span>
+    <span ng-show="samplrForm.email.$error.email">Invalid Email address.</span>
+</p>
+<p>
+    <button class="btn btn-link" ng-click="reset()">Reset</button>
+    <input type="submit" class="btn btn-primary" ng-disabled="sampleForm.$invalid"
+ng-click="chechData()">
+</p>
+</form>
+</body>
+</html>

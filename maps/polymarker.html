@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<src="http://maps.googleapis.com/maps/api/js">
+
+ <script src="///D:/Shruthi/AngularJSProject-master/js/polymarker.js">
+ </script>
+<script>
+var MarkerData = [49.272238, -123.122482, "Elsie Roy Elementary"];
+var PathData = [
+[49.2761419673641, -123.118069007778], 
+[49.2791259862655, -123.129144031353],
+[49.2704849721733, -123.125236002048],
+[49.2732990317854, -123.117229946411],
+[49.2761419673641, -123.118069007778]
+];
+ 
+function initialize() {
+    var map = 
+        new google.maps.Map(document.getElementById('map-canvas'));
+    var infowindow = new google.maps.InfoWindow();
+    var center = 
+        new google.maps.LatLng(MarkerData[0], MarkerData[1]);
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map,
+        title: MarkerData[2]
+    });
+ 
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(this.title);
+        infowindow.open(map, this);
+    });
+ 
+    var path = [];
+    var bounds = new google.maps.LatLngBounds();
+    bounds.extend(center);
+    for (var i in PathData)
+    {
+        var p = PathData[i];
+        var latlng = new google.maps.LatLng(p[0], p[1]);
+        path.push(latlng);
+        bounds.extend(latlng);
+    }
+    var poly = new google.maps.Polygon({
+        paths: path,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 3,
+        fillColor: '#FF0000',
+        fillOpacity: 0.1
+    });
+    poly.setMap(map);
+     
+     
+    map.fitBounds(bounds);
+}
+ 
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+
+<body>
+<div id="googleMap" style="width:1600px;height:1200px;"></div>
+</body>
+</html>
